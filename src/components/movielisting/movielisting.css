@@ -1,0 +1,22 @@
+.moviesandseasons {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: rgba(52, 52, 156, 0.603);
+  width: 95vw;
+  margin: 0px auto;
+}
+.movie {
+  color: #919191;
+  background-color: #171718;
+  margin-top: 3rem;
+  border-radius: 0.25rem;
+}
+.movie img {
+  border: 2px solid white;
+  border-radius: 0.25rem;
+}
+.movie p {
+  text-align: center;
+}

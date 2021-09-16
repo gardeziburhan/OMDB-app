@@ -1,0 +1,9 @@
+.OMDBfooter {
+  background: #0f171e;
+  /* height: calc(100vh); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  flex-direction: column;
+}
