@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import MovieListing from './components/movielisting/movieListing';
 import './App.css';
 import movieApi from './movieapi/movieApi';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ResponseStatus from './components/ResponseStatus/ResponseStatus';
