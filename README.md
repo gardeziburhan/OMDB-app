@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# OMDB App
+
+# View on Live Server
+
+https://omdb-app-burhan-gardezi.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
