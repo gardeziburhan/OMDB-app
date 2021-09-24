@@ -1,79 +1,68 @@
-import React, {useState, useEffect} from 'react'
-import MovieListing from './components/movielisting/movieListing';
-import './App.css';
-import movieApi from './movieapi/movieApi';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import ResponseStatus from './components/ResponseStatus/ResponseStatus';
+  import React, {useState} from 'react'
+  import './App.css';
+  import MovieListing from './components/movielisting/movieListing';
+  import SearchSection from './components/SearchSection/SearchSection'
+  import Header from './components/Header/Header';
+  import Footer from './components/Footer/Footer';
+  import ResponseStatus from './components/ResponseStatus/ResponseStatus';
+  // import { Router } from 'react-router';
+  // import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+  // import {connect, Provider} from 'react-redux';
+  import {getUsers} from './store/actions/userActions';
+  import { useDispatch,useSelector } from 'react-redux';
+import store from './store/store';
 
-function App() {
-  const [outputArr, setOutputArr] = useState([]);
-  const [arrResponse, setArrResponse] = useState('');
 
-  const fetchMovies = async(searchText) => {
-      setArrResponse('Pending');
-      const response =await  movieApi.get(`?apikey=3123e26a&s=${searchText}&type=movie`)
-      console.log(response)
-      console.log(response.data.Response)
-      if (response.data.Response === "True"){
-        setArrResponse('True');
-        setOutputArr(response.data.Search);
-      }
-      else{
-        setArrResponse('False')
-        setOutputArr([])
-      }
+
+  function App(props) {
+    const [outputArr, setOutputArr] = useState([]);
+    const [arrResponse, setArrResponse] = useState('');
+
+    const usersListData = useSelector((state) => state.usersList);
+    console.log(" userlistdata is:",usersListData)
+    
+  function useFetchEvents(searchText) {
+    const dispatch = useDispatch()
+    console.log("the Search text of usefetchevents", searchText)
+    return (searchText) => {
+          // Redux action. requestEvents returns object with type.
+        dispatch(getUsers(searchText))
+    }
   }
-  
-  console.log("The output is: ", outputArr)
+  console.log('the error status is', usersListData.error)
+
+   const fetchEvent = useFetchEvents();
+
   return (
-    <div className='container'>
-      <Header/>
-      <SearchSection fetchMovies={fetchMovies} />
-      <ResponseStatus arrResponse={arrResponse}/>
-      <MovieListing movie={outputArr}/>
-      <Footer/>
-    </div>
-  );
-}
-
-function SearchSection(props){
-
-  const [searchText, setSearchText] = useState([]);
- 
-  const handleTextChange =(event)=>{
-    setSearchText(event.target.value);
     
-  };
-
-  const handleButtonClick =() =>{
-    return props.fetchMovies(searchText);
-  };
-    
-  return(
-  <div>
-    <div className="moviesearchform">
-      <h3>OMDB Movie Search </h3>
-      <div className="form">
-        <label>Title:</label>
-        <input className="inputmoviedetails" type="text"  id="mtitle" name="mtitle" onChange={handleTextChange}/>
-        <label>Year:</label>
-        <input className="inputmoviedetails" type="text" id="year" name="year"/>
-        <select id="mtype" name="mtype">
-          <option value="short">Short</option>
-          <option value="full">Full</option>
-        </select>
-        <select id="rtype" name="rtype">
-          <option value="jsonr">XML</option>
-          <option value="xmlr">JSON</option>
-        </select>
-        <button className="btn" onClick={handleButtonClick}>Submit</button>
+      <div className='container'>
+        <Header/>
+        <SearchSection fetchEvent={fetchEvent} />
+        <ResponseStatus arrResponse={usersListData.error}/>
+        <MovieListing movie={usersListData.users}/>
+        <Footer/>
       </div>
-    </div>
-  </div>
-    );
-  };
+    
+  );}
 
-export default App
+  export default App;
 
+// fetching movies without using redux
+
+//   const fetchMovies = async(searchText) => {
+//     console.log("The value of search Text  in fetch movies, ", searchText)
+    
+//     setArrResponse('Pending');
+//       const response = await movieApi.get(`?apikey=3123e26a&s=${searchText}&type=movie`)
+//       console.log("The value of response from the url is", response)
+//       console.log("The movies from the url are",response.data.Response)
+//       if (response.data.Response === "True"){
+//         setArrResponse('True');
+//         setOutputArr(response.data.Search);
+//       }
+//       else{
+//         setArrResponse('False')
+//         setOutputArr([])
+//       }   
+//   console.log("The output array for the list of movies are: ", outputArr, arrResponse)
+// }

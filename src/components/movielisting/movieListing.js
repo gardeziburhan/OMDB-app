@@ -2,11 +2,8 @@ import React from 'react';
 import './movielisting.css';
 
 const MovieListing = (props) => {
-  console.log(props)
+  console.log("props in movieListing ", props)
   return (
-    // if(props.movie.length>=2){
-      
-    // }
     <div className="moviesandseasons">
       {props.movie.map((movie, index) => (
         
