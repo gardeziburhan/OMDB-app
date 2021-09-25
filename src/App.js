@@ -5,33 +5,27 @@
   import Header from './components/Header/Header';
   import Footer from './components/Footer/Footer';
   import ResponseStatus from './components/ResponseStatus/ResponseStatus';
-  // import { Router } from 'react-router';
-  // import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-  // import {connect, Provider} from 'react-redux';
   import {getUsers} from './store/actions/userActions';
   import { useDispatch,useSelector } from 'react-redux';
-import store from './store/store';
 
 
 
 
   function App(props) {
-    const [outputArr, setOutputArr] = useState([]);
-    const [arrResponse, setArrResponse] = useState('');
 
     const usersListData = useSelector((state) => state.usersList);
-    console.log(" userlistdata is:",usersListData)
     
-  function useFetchEvents(searchText) {
-    const dispatch = useDispatch()
-    console.log("the Search text of usefetchevents", searchText)
-    return (searchText) => {
-          // Redux action. requestEvents returns object with type.
+    function useFetchEvents(searchText) {
+      const dispatch = useDispatch()
+      console.log("the Search text of usefetchevents", searchText)
+      return (searchText) => {
+        // Redux action. requestEvents returns object with type.
         dispatch(getUsers(searchText))
+      }
     }
-  }
-  console.log('the error status is', usersListData.error)
-
+    console.log('the error status is', usersListData.error)
+    
+    console.log(" userlistdata is:",usersListData)
    const fetchEvent = useFetchEvents();
 
   return (

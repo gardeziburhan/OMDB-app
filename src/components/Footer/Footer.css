@@ -1,6 +1,6 @@
 .OMDBfooter {
-  background: #0f171e;
-  /* height: calc(100vh); */
+  background: inherit;
+  height: calc(100%- 30px);
   display: flex;
   justify-content: center;
   align-items: center;

@@ -3,7 +3,7 @@ import { GET_USERS, USERS_ERROR } from "../types";
 const initialState = {
   users: [],
   loading: true,
-  error: false
+  error: ''
 };
 
 export default function (state = initialState, action) {
@@ -14,7 +14,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         users: action.payload.Search,
-        loading: false
+        loading: false,
+        error: false
       };
     case USERS_ERROR:
       return {
